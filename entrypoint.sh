@@ -7,10 +7,10 @@ PASSWORD="${PROXY_PASSWORD:-summer125}"
 # 生成密码文件
 echo "$USERNAME:$PASSWORD" > /etc/danted.passwd
 
-# 动态获取容器出口 IP（Alpine 兼容！）
-CONTAINER_IP=$(ifconfig eth0 | grep 'inet ' | awk '{print $2}' | cut -d: -f2)
+# 动态获取容器 IP（Alpine busybox 兼容）
+CONTAINER_IP=$(hostname -i)
 
-# 替换 danted.conf 中的 external 为实际 IP
+# 替换配置中的 PLACEHOLDER 为实际 IP
 sed -i "s/external: PLACEHOLDER/external: $CONTAINER_IP/" /etc/danted.conf
 
 # 启动 sockd
