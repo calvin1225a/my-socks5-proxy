@@ -1,17 +1,14 @@
 #!/bin/sh
 
-# 使用环境变量（你的设置）
+# 使用环境变量
 USERNAME="${PROXY_USER:-daqiang}"
 PASSWORD="${PROXY_PASSWORD:-summer125}"
 
 # 生成密码文件
 echo "$USERNAME:$PASSWORD" > /etc/danted.passwd
 
-# 动态获取容器 IP（关键！）
-CONTAINER_IP=$(ip -4 addr show eth0 | grep -Po 'inet \K[\d.]+')
+# 等待网络初始化（解决 eth0 绑定延迟）
+sleep 5
 
-# 替换 danted.conf 中的 external 为实际 IP
-sed -i "s/external: eth0/external: $CONTAINER_IP/" /etc/danted.conf
-
-# 启动 sockd
+# 启动 sockd（无需动态 IP）
 exec sockd -f /etc/danted.conf -D
