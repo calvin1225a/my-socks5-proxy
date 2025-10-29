@@ -2,7 +2,7 @@
 FROM alpine:3.18
 
 # 安装 dante-server (一个稳定且强大的 SOCKS 服务器)
-RUN apk add --no-cache dante-server pam-dev
+RUN apk add --no-cache dante-server linux-pam-dev
 
 # 复制我们的配置文件
 COPY danted.conf /etc/danted.conf
