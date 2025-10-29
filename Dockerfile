@@ -1,7 +1,7 @@
 FROM alpine:latest
 
-# 安装 dante-server 和 iproute2（用于动态 IP 获取）
-RUN apk add --no-cache dante-server iproute2
+# 安装 dante-server 和 net-tools（用于动态 IP 获取）
+RUN apk add --no-cache dante-server net-tools
 
 COPY danted.conf /etc/danted.conf
 COPY entrypoint.sh /entrypoint.sh
