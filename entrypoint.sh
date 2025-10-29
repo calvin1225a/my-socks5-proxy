@@ -1,14 +1,11 @@
 #!/bin/sh
 
-# 设置用户名和密码（请修改为你自己的！）
+# 设置用户名和密码（请修改！）
 USERNAME="daqiang"
-PASSWORD="your_strong_password_123"  # ←←← 修改这里！
+PASSWORD="daqiang123456"  # ← 修改成你的强密码！
 
-# 生成加密密码文件
-echo "$USERNAME:$(echo "$PASSWORD" | openssl passwd -stdin -apr1)" > /etc/danted.passwd
-
-# 或者如果你不想用 openssl 加密（明文也行，但不安全）：
-# echo "$USERNAME:$PASSWORD" > /etc/danted.passwd
+# 直接写明文密码文件（dante 支持明文）
+echo "$USERNAME:$PASSWORD" > /etc/danted.passwd
 
 # 启动 danted
 exec danted -f /etc/danted.conf -D
