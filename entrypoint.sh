@@ -15,4 +15,4 @@ echo "SOCKS5 代理用户 $PROXY_USER 已创建。"
 
 # 在前台启动 dante 服务器 (Docker 容器需要这样)
 echo "正在启动 SOCKS5 代理服务..."
-exec /usr/sbin/danted -f /etc/danted.conf -D
+exec /usr/sbin/danted -f /etc/sockd.conf -D
